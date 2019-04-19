@@ -1,0 +1,5 @@
+node_modules/
+.next/
+examples/
+.vscode/
+node_modules
