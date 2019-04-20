@@ -1,12 +1,17 @@
 import React from "react";
 import BaseLayout from "../components/layout/BaseLayout";
-import { Button } from "reactstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Container, Row, Col } from "reactstrap";
 
 const Index = () => {
   return (
     <BaseLayout>
-      Index page <Button color="danger">Danger!</Button>
+      <Container>
+        <Row>
+          <Col>
+            Index page <Button color="warning">Danger!</Button>
+          </Col>
+        </Row>
+      </Container>
     </BaseLayout>
   );
 };

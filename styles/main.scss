@@ -1,4 +1,8 @@
-.menu-ul {
-  display: flex;
-  color: "green";
+@import "./shared/fonts";
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: "Montserrat", "Helvetica";
 }
