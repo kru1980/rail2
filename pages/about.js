@@ -1,7 +1,8 @@
 import React from "react";
+import BaseLayout from "../components/layout/BaseLayout";
 
 const About = () => {
-  return <div>About page</div>;
+  return <BaseLayout>About page</BaseLayout>;
 };
 
 export default About;
