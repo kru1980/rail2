@@ -17,10 +17,26 @@ const Index = () => {
                 <div className={`flipper`}>
                   <div className="back">
                     <div className="hero-section-content">
-                      <h2> Full Stack Web Developer </h2>
+                      <h2> Наши контакты </h2>
                       <div className="hero-section-content-intro">
-                        Have a look at my portfolio and job history.
+                        <ul>
+                          <li>
+                            <h4>
+                              Москва<span>+79530481401</span>{" "}
+                            </h4>
+                          </li>
+                          <li>
+                            <h4>
+                              Екатеринбург<span>+79530481401</span>{" "}
+                            </h4>
+                          </li>
+                        </ul>
                       </div>
+                      <h4>
+                        Welcome to the portfolio website of Filip Jerga. Get
+                        informed, collaborate and discover projects I was
+                        working on through the years!
+                      </h4>
                     </div>
                     {/* <img className="image" src="/static/images/section-1.png" /> */}
                     <div className="shadow-custom">
@@ -32,11 +48,11 @@ const Index = () => {
             </Col>
             <Col md="6" className="hero-welcome-wrapper">
               <div className="hero-welcome-text">
-                <h1>
+                <h4>
                   Welcome to the portfolio website of Filip Jerga. Get informed,
                   collaborate and discover projects I was working on through the
                   years!
-                </h1>
+                </h4>
               </div>
               <div className="hero-welcome-bio">
                 <h1>Let's take a look on my work.</h1>
