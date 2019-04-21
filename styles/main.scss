@@ -1,8 +1,19 @@
 @import "./shared/fonts";
 
+// pages
+@import "./shared/index";
+
+// components
+@import "./shared/headers";
+
 html,
 body {
   height: 100%;
   width: 100%;
   font-family: "Montserrat", "Helvetica";
+  background-image: url("/static/images/background-index.png");
+}
+
+.absolute {
+  position: absolute;
 }
