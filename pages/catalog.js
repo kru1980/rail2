@@ -3,9 +3,9 @@ import BaseLayout from "../components/layout/BaseLayout";
 import BasePage from "../components/layout/BasePage";
 import { Button, Container, Row, Col } from "reactstrap";
 
-const Catalog = () => {
+const Catalog = props => {
   return (
-    <BaseLayout>
+    <BaseLayout {...props.auth}>
       <BasePage>Catalog page</BasePage>
     </BaseLayout>
   );

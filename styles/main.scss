@@ -11,7 +11,7 @@ body {
   height: 100%;
   width: 100%;
   font-family: "Montserrat", "Helvetica";
-  background-image: url("/static/images/background-index.png");
+  // background-image: url("/static/images/background-index.png");
 }
 
 .absolute {
@@ -19,4 +19,7 @@ body {
 }
 .base-page {
   padding-top: 150px;
+}
+.clickable {
+  cursor: pointer;
 }

@@ -1,34 +1,6 @@
-// import React from "react";
-// import Link from "next/link";
-
-// const Header = () => {
-//   return (
-//     <nav>
-//       <ul className="menu-ul">
-//         <li className="menu-items">
-//           <Link prefetch href="/">
-//             <a>Home</a>
-//           </Link>
-//         </li>
-//         <li>
-//           <Link prefetch href="/about">
-//             <a>About</a>
-//           </Link>
-//         </li>
-//         <li>
-//           <Link prefetch href="/contacts">
-//             <a>Contact</a>
-//           </Link>
-//         </li>
-//       </ul>
-//     </nav>
-//   );
-// };
-
-// export default Header;
-
 import React from "react";
 import Link from "next/link";
+import auth0 from "../../services/auth0";
 import {
   Collapse,
   Navbar,
@@ -43,18 +15,38 @@ import {
   DropdownItem
 } from "reactstrap";
 
-const BsNavLink = ({ route, title }) => {
+const BsNavLink = props => {
+  const { route, title } = props;
   return (
     <Link href={route}>
-      <a className="nav-link">{title}</a>
+      <a className="nav-link port-navbar-link">{title}</a>
     </Link>
   );
 };
+
 const BsNavLinkDropDown = ({ route, title }) => {
   return (
     <Link href={route}>
-      <a className="dropdown-item">{title}</a>
+      <a className="dropdown-item ">{title}</a>
     </Link>
+  );
+};
+
+const Login = () => {
+  return (
+    <span onClick={auth0.login} className="nav-link port-navbar-link clickable">
+      Login
+    </span>
+  );
+};
+const Logout = () => {
+  return (
+    <span
+      onClick={auth0.logout}
+      className="nav-link port-navbar-link clickable"
+    >
+      Logout
+    </span>
   );
 };
 
@@ -73,6 +65,11 @@ export default class Header extends React.Component {
     });
   }
   render() {
+    const { isAuthenticated, user } = this.props;
+    // console.log("user header", user);
+    // console.log("props header", this.props);
+    // console.log("isAuthenticated header", isAuthenticated);
+
     return (
       <div>
         <Navbar
@@ -93,6 +90,19 @@ export default class Header extends React.Component {
               <NavItem className="port-navbar-item">
                 <BsNavLink title="Каталог" route="/catalog" />
               </NavItem>
+
+              {!isAuthenticated && (
+                <NavItem className="port-navbar-item">
+                  <Login />
+                </NavItem>
+              )}
+
+              {isAuthenticated && (
+                <NavItem className="port-navbar-item">
+                  <Logout />
+                </NavItem>
+              )}
+
               {/* <NavItem>
                 <BsNavLink title="Условия" route="/conditions" />
               </NavItem>
@@ -101,7 +111,18 @@ export default class Header extends React.Component {
               </NavItem> */}
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Продукция
+                  {/* span вынести в файл стилей, добавить ховер и стили для after компонента port-navbar-link nav-link*/}
+                  <span
+                    style={{
+                      fontWeight: "bold",
+                      letterSpacing: "0.8px",
+                      fontSize: "18px",
+                      textTransform: "uppercase",
+                      color: "white"
+                    }}
+                  >
+                    Продукция
+                  </span>
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
