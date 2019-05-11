@@ -1,10 +1,13 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { getCookiesFromRequestFunction } from "../helpers/utils";
 
 // 'экшен  который получит секретные данные при условии проверки и идентификации токена
 
-const setAuthHeader = () => {
-  const token = Cookies.getJSON("jwt");
+const setAuthHeader = req => {
+  const token = req
+    ? getCookiesFromRequestFunction(req, "jwt")
+    : Cookies.getJSON("jwt");
   if (token) {
     return {
       headers: { authorization: `Bearer ${token}` }
@@ -13,8 +16,16 @@ const setAuthHeader = () => {
   }
 };
 
-export const getSecretData = async () => {
+export const getSecretData = async req => {
+  const url = "http://localhost:3000/api/v1/secret";
+
   return await axios
-    .get("/api/v1/secret", setAuthHeader())
+    .get(url, setAuthHeader(req))
+    .then(response => response.data);
+};
+
+export const getPortfolios = async () => {
+  return await axios
+    .get("https://jsonplaceholder.typicode.com/posts")
     .then(response => response.data);
 };

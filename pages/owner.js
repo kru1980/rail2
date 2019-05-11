@@ -1,14 +1,14 @@
 import React from "react";
 import BaseLayout from "../components/layout/BaseLayout";
 import BasePage from "../components/layout/BasePage";
-import { Button, Container, Row, Col } from "reactstrap";
+import withAuth from "../components/hoc/withAuth";
 
-const Catalog = props => {
+const Owner = props => {
   return (
     <BaseLayout {...props.auth}>
-      <BasePage title="Catalog page" />
+      <BasePage>Owner page</BasePage>
     </BaseLayout>
   );
 };
 
-export default Catalog;
+export default withAuth("siteOwner")(Owner);

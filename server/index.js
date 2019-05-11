@@ -24,6 +24,15 @@ app
       return res.json(secretData);
       // прежде чем отсылать данные проверит авторизован юзер или нет
     });
+    server.get(
+      "/api/v1/onlysiteowner",
+      authService.checkJWT,
+      authService.checkRole("siteowner"),
+      (req, res) => {
+        return res.json(secretData);
+        // прежде чем отсылать данные проверит авторизован юзер или нет
+      }
+    );
 
     server.get("*", (req, res) => {
       return handler(req, res);

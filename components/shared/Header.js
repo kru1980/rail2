@@ -65,10 +65,7 @@ export default class Header extends React.Component {
     });
   }
   render() {
-    const { isAuthenticated, user } = this.props;
-    // console.log("user header", user);
-    // console.log("props header", this.props);
-    // console.log("isAuthenticated header", isAuthenticated);
+    const { isAuthenticated, user, className } = this.props;
 
     return (
       <div>
@@ -76,7 +73,7 @@ export default class Header extends React.Component {
           color="dark"
           dark
           expand="sm"
-          className="port-navbar port-default absolute"
+          className={`port-navbar port-nav-base absolute ${className}`}
         >
           <NavbarBrand className="port-navbar-brand" href="/">
             АЗИЯ ТРАНС ТРЕЙД
@@ -87,8 +84,11 @@ export default class Header extends React.Component {
               <NavItem className="port-navbar-item">
                 <BsNavLink title="Компания" route="/about" />
               </NavItem>
-              <NavItem className="port-navbar-item">
+              {/* <NavItem className="port-navbar-item">
                 <BsNavLink title="Каталог" route="/catalog" />
+              </NavItem> */}
+              <NavItem className="port-navbar-item">
+                <BsNavLink route="/portfolios " title="Portfolio" />
               </NavItem>
 
               {!isAuthenticated && (

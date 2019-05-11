@@ -6,7 +6,7 @@ import { Button, Container, Row, Col } from "reactstrap";
 const About = props => {
   return (
     <BaseLayout {...props.auth}>
-      <BasePage className="about-page">About page</BasePage>
+      <BasePage title="About page" className="about-page" />
     </BaseLayout>
   );
 };

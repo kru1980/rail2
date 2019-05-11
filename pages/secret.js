@@ -2,14 +2,16 @@ import React from "react";
 import BaseLayout from "../components/layout/BaseLayout";
 import BasePage from "../components/layout/BasePage";
 import withAuth from "../components/hoc/withAuth";
-import { getSecretData } from "../actions/index";
+import { getSecretData, getSecretDataServer } from "../actions";
 import axios from "axios";
 
 class Secret extends React.Component {
   state = { secretData: [] };
 
-  static getInitialProps() {
-    return {};
+  static async getInitialProps({ req }) {
+    const anotherSecretData = await getSecretData(req);
+
+    return { anotherSecretData };
   }
 
   async componentDidMount() {
@@ -48,4 +50,4 @@ class Secret extends React.Component {
   }
 }
 
-export default withAuth(Secret);
+export default withAuth("admin")(Secret);
