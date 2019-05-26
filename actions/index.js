@@ -29,3 +29,10 @@ export const getPortfolios = async () => {
     .get("https://jsonplaceholder.typicode.com/posts")
     .then(response => response.data);
 };
+
+export const createPortfolio = async portfolioData => {
+  return await axios
+    .post("/portfolios", portfolioData, setAuthHeader())
+    .then(response => response.data)
+    .catch(error => rejectPromise(error));
+};

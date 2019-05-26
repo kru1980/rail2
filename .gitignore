@@ -5,3 +5,5 @@ examples/
 node_modules
 
 db_key
+
+/server/config/dev.js

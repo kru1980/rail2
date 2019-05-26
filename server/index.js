@@ -1,6 +1,8 @@
 const express = require("express");
 const next = require("next");
 const routes = require("../routes");
+const mongoose = require("mongoose");
+const config = require("./config/index");
 
 //service
 const authService = require("./services/auth"); // мидлвар смотрит авторизован юзер или нет
@@ -14,6 +16,11 @@ const secretData = [
   { title: 1, description: "vata" },
   { title: 2, description: "rada" }
 ];
+
+mongoose
+  .connect(config.DB_URI, { useNewUrlParser: true })
+  .then(() => console.log("Database Connected!"))
+  .catch(err => console.error(err));
 
 app
   .prepare()
@@ -33,6 +40,32 @@ app
         // прежде чем отсылать данные проверит авторизован юзер или нет
       }
     );
+    // ============= learn mongoose
+    server.get("/addRail", (req, res) => {
+      var railSchema = new mongoose.Schema({
+        name: String,
+        age: Number
+      });
+
+      var Rail = mongoose.model("rail", railSchema);
+
+      const railFirst = new Rail({ name: "vatan", age: 38 });
+      railFirst.save().then(() => console.log("рельс добавлен"));
+
+      return res.json(railFirst);
+    });
+    server.get("/getRails", async (req, res) => {
+      try {
+        const cats = await rail.find();
+        res.json(cats);
+      } catch (error) {
+        console.log(error);
+
+        res.send({ error: error.message });
+      }
+    });
+
+    // ============= learn mongoose end
 
     server.get("*", (req, res) => {
       return handler(req, res);

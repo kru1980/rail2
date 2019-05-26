@@ -23,6 +23,10 @@ body {
 .clickable {
   cursor: pointer;
 }
+.error {
+  font-weight: 700;
+  color: red;
+}
 
 .base-page {
   padding: 150px 0 100px 0;
