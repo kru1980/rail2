@@ -1,6 +1,11 @@
 const express = require("express");
 const next = require("next");
 const routes = require("../routes");
+const bodyParser = require("body-parser");
+
+const bookRoutes = require("./routes/book");
+const portfolioRoutes = require("./routes/portfolio");
+
 const mongoose = require("mongoose");
 const config = require("./config/index");
 
@@ -26,6 +31,9 @@ app
   .prepare()
   .then(() => {
     const server = express();
+    server.use(bodyParser.json());
+    server.use("/api/v1/books", bookRoutes);
+    server.use("/api/v1/portfolios", portfolioRoutes);
 
     server.get("/api/v1/secret", authService.checkJWT, (req, res) => {
       return res.json(secretData);
@@ -34,36 +42,66 @@ app
     server.get(
       "/api/v1/onlysiteowner",
       authService.checkJWT,
-      authService.checkRole("siteowner"),
+      authService.checkRole("siteOwner"),
       (req, res) => {
         return res.json(secretData);
         // прежде чем отсылать данные проверит авторизован юзер или нет
       }
     );
     // ============= learn mongoose
-    server.get("/addRail", (req, res) => {
-      var railSchema = new mongoose.Schema({
-        name: String,
-        age: Number
-      });
+    // server.post("/api/v1/books", (req, res) => {
+    //   const bookData = req.body;
 
-      var Rail = mongoose.model("rail", railSchema);
+    //   const book = new Book(bookData);
 
-      const railFirst = new Rail({ name: "vatan", age: 38 });
-      railFirst.save().then(() => console.log("рельс добавлен"));
+    //   book.save((err, createdBook) => {
+    //     if (err) {
+    //       return res.status(422).send(err);
+    //     }
+    //     return res.json(createdBook);
+    //   });
+    // });
 
-      return res.json(railFirst);
-    });
-    server.get("/getRails", async (req, res) => {
-      try {
-        const cats = await rail.find();
-        res.json(cats);
-      } catch (error) {
-        console.log(error);
+    // server.get("/api/v1/books", (req, res) => {
+    //   Book.find((err, allBooks) => {
+    //     if (err) {
+    //       return res.status(422).send(err);
+    //     }
+    //     return res.json(allBooks);
+    //   });
+    // });
 
-        res.send({ error: error.message });
-      }
-    });
+    // server.patch("/api/v1/books/:id", (req, res) => {
+    //   const bookId = req.params.id;
+    //   const bookData = req.body;
+
+    //   Book.findById(bookId, (err, foundBook) => {
+    //     if (err) {
+    //       return res.status(422).send(err);
+    //     }
+
+    //     foundBook.set(bookData);
+    //     foundBook.save((err, savedBook) => {
+    //       if (err) {
+    //         return res.status(422).send(err);
+    //       }
+    //       // console.log(foundBook, "foundBook");
+
+    //       return res.json(foundBook);
+    //     });
+    //   });
+    // });
+
+    // server.delete("/api/v1/books/:id", (req, res) => {
+    //   const bookId = req.params.id;
+
+    //   Book.deleteOne({ _id: bookId }, (err, deletedBook) => {
+    //     if (err) {
+    //       return res.status(422).send(err);
+    //     }
+    //     return res.json({ status: "DELETED" });
+    //   });
+    // });
 
     // ============= learn mongoose end
 
