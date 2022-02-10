@@ -18,7 +18,7 @@
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
     "next": "^8.1.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "reactstrap": "^8.0.0"
